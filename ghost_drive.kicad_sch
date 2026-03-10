@@ -3533,6 +3533,19 @@
 		)
 		(uuid 1c706ebe-2c47-41ca-8b5a-fac23c9cc3d9)
 	)
+	(circle
+		(center 156.21 52.07)
+		(radius 9.1581)
+		(stroke
+			(width 1.27)
+			(type solid)
+			(color 255 0 0 1)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 220b69b6-aa04-4df5-bebd-f0dc2d014800)
+	)
 	(rectangle
 		(start 135.89 22.86)
 		(end 207.01 87.63)
@@ -3545,6 +3558,45 @@
 		)
 		(uuid 3ea950a1-e90e-48a9-84d2-303a99aa5dfe)
 	)
+	(circle
+		(center 238.76 30.48)
+		(radius 9.1581)
+		(stroke
+			(width 1.27)
+			(type solid)
+			(color 255 0 0 1)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 4132f2e2-7f46-4e33-976e-490226e30907)
+	)
+	(circle
+		(center 180.34 45.72)
+		(radius 9.1581)
+		(stroke
+			(width 1.27)
+			(type solid)
+			(color 255 0 0 1)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 70dd2341-e18c-49b4-8eeb-ae176e53b3b4)
+	)
+	(circle
+		(center 90.17 22.86)
+		(radius 9.1581)
+		(stroke
+			(width 1.27)
+			(type solid)
+			(color 255 0 0 1)
+		)
+		(fill
+			(type none)
+		)
+		(uuid b36f8316-9615-4db7-a7a5-a28ea3710be5)
+	)
 	(rectangle
 		(start 217.17 22.86)
 		(end 280.67 85.09)
@@ -3556,6 +3608,58 @@
 			(type none)
 		)
 		(uuid debe983d-a365-4b23-9eca-0b2995de377d)
+	)
+	(circle
+		(center 74.93 54.61)
+		(radius 9.1581)
+		(stroke
+			(width 1.27)
+			(type solid)
+			(color 255 0 0 1)
+		)
+		(fill
+			(type none)
+		)
+		(uuid fdf88d90-20d9-44df-815e-01da97be5017)
+	)
+	(text "condensateurs découplages"
+		(exclude_from_sim no)
+		(at 109.982 14.224 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+				(bold yes)
+				(color 255 0 0 1)
+			)
+		)
+		(uuid "2ef0cedd-685f-497c-987b-840cbefb378e")
+	)
+	(text "manquent des composants ?"
+		(exclude_from_sim no)
+		(at 69.596 67.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+				(bold yes)
+				(color 255 0 0 1)
+			)
+		)
+		(uuid "3e7c135f-bcba-4689-b91c-d78583f6a327")
+	)
+	(text "manquent des composants ?"
+		(exclude_from_sim no)
+		(at 181.356 32.766 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+				(bold yes)
+				(color 255 0 0 1)
+			)
+		)
+		(uuid "a730003a-d68b-4fb1-9f29-6380ea0e74a6")
 	)
 	(text "AVR ISP"
 		(exclude_from_sim no)
@@ -3604,6 +3708,32 @@
 			)
 		)
 		(uuid "ca5caef8-9b94-4d00-a864-2a4a3b11ad36")
+	)
+	(text "manque mémoire (AT ...)"
+		(exclude_from_sim no)
+		(at 232.664 113.284 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+				(bold yes)
+				(color 255 0 0 1)
+			)
+		)
+		(uuid "e1f98064-0088-44f8-a0ed-135f105e5045")
+	)
+	(text "USB A ou B"
+		(exclude_from_sim no)
+		(at 233.68 14.478 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+				(bold yes)
+				(color 255 0 0 1)
+			)
+		)
+		(uuid "fed83d6b-9c45-47b5-98e3-ebca752a61c8")
 	)
 	(junction
 		(at 38.1 44.45)
