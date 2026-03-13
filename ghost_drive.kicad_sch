@@ -4067,6 +4067,42 @@
 		)
 		(uuid 3ea950a1-e90e-48a9-84d2-303a99aa5dfe)
 	)
+	(circle
+		(center 180.34 68.58)
+		(radius 6.35)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 4116a317-7d80-4aa2-a5b2-50b88303483b)
+	)
+	(circle
+		(center 230.886 95.25)
+		(radius 6.35)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 69d66a51-ce52-4637-9071-5663f0c6da72)
+	)
+	(circle
+		(center 243.586 142.24)
+		(radius 6.35)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 6fdb332f-972f-4c65-bc85-3522eb5d1206)
+	)
 	(rectangle
 		(start 220.98 130.81)
 		(end 280.67 161.29)
@@ -4078,6 +4114,30 @@
 			(type none)
 		)
 		(uuid 9a70977b-adde-4bf3-98de-b697875be6f2)
+	)
+	(circle
+		(center 116.84 48.26)
+		(radius 11.9812)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid a31e6db1-ecda-47c4-acf6-cab91760aeb6)
+	)
+	(circle
+		(center 81.28 25.4)
+		(radius 11.9812)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid da4882f2-e7b0-4ce8-bdb1-75482c7733da)
 	)
 	(rectangle
 		(start 223.52 22.86)
@@ -4114,6 +4174,46 @@
 			)
 		)
 		(uuid "34f37574-2d5d-418e-a424-f837d32be141")
+	)
+	(text "pull-up ou pull-down resistor"
+		(exclude_from_sim no)
+		(at 242.57 151.13 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "4b836484-3a53-4d77-91b2-ef9b44533ab9")
+	)
+	(text "vbat ?"
+		(exclude_from_sim no)
+		(at 179.324 77.47 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "583f6691-3486-4c6f-88cc-67406db7d278")
+	)
+	(text "relier au uC"
+		(exclude_from_sim no)
+		(at 229.87 104.14 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "6e864d3d-ff3b-4979-8979-3679ded9e934")
+	)
+	(text "découplage\ncf. https://ww1.microchip.com/downloads/en/AppNotes/00002519A.pdf p20"
+		(exclude_from_sim no)
+		(at 98.044 7.112 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "7766cc97-349d-4519-8bf7-69ab1be895a0")
 	)
 	(text "AVR ISP"
 		(exclude_from_sim no)
@@ -4162,6 +4262,16 @@
 			)
 		)
 		(uuid "ca5caef8-9b94-4d00-a864-2a4a3b11ad36")
+	)
+	(text "résistance\ncf. https://ww1.microchip.com/downloads/en/AppNotes/00002519A.pdf p10"
+		(exclude_from_sim no)
+		(at 128.016 31.75 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "f5144478-a876-4ec7-a801-585a682325e6")
 	)
 	(junction
 		(at 187.96 44.45)
