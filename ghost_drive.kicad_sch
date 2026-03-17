@@ -4031,6 +4031,32 @@
 		)
 		(uuid 00730e51-5113-4976-8c4c-dcb0c3bc0864)
 	)
+	(circle
+		(center 252.73 140.97)
+		(radius 8.132)
+		(stroke
+			(width 1.27)
+			(type solid)
+			(color 255 0 0 1)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 03c59ead-8c97-4eec-91c2-1bf3c3e5cea6)
+	)
+	(circle
+		(center 270.51 109.22)
+		(radius 8.132)
+		(stroke
+			(width 1.27)
+			(type solid)
+			(color 255 0 0 1)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 0aabd6ce-3cd9-4cfc-b109-b521a5901aaf)
+	)
 	(rectangle
 		(start 222.25 73.66)
 		(end 279.4 116.84)
@@ -4042,6 +4068,19 @@
 			(type none)
 		)
 		(uuid 0debaf29-eb61-4f93-9fc0-9050f489292a)
+	)
+	(circle
+		(center 151.13 31.75)
+		(radius 8.132)
+		(stroke
+			(width 1.27)
+			(type solid)
+			(color 255 0 0 1)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 1ac0aafa-134b-4c9c-8e8a-ae189e66315b)
 	)
 	(rectangle
 		(start 13.97 16.51)
@@ -4067,6 +4106,19 @@
 		)
 		(uuid 3ea950a1-e90e-48a9-84d2-303a99aa5dfe)
 	)
+	(circle
+		(center 31.75 148.59)
+		(radius 8.132)
+		(stroke
+			(width 1.27)
+			(type solid)
+			(color 255 0 0 1)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 5337e355-b37c-4a36-b617-7a4cfb8696ca)
+	)
 	(rectangle
 		(start 220.98 130.81)
 		(end 280.67 165.1)
@@ -4078,6 +4130,19 @@
 			(type none)
 		)
 		(uuid 9a70977b-adde-4bf3-98de-b697875be6f2)
+	)
+	(circle
+		(center 91.44 20.32)
+		(radius 8.132)
+		(stroke
+			(width 1.27)
+			(type solid)
+			(color 255 0 0 1)
+		)
+		(fill
+			(type none)
+		)
+		(uuid d4b72046-73bb-4011-b68d-0e47a78f4672)
 	)
 	(rectangle
 		(start 223.52 22.86)
@@ -4103,6 +4168,19 @@
 		)
 		(uuid "1429d17b-504c-4fff-9e9d-354803b3b668")
 	)
+	(text "ISP"
+		(exclude_from_sim no)
+		(at 42.418 151.384 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+				(bold yes)
+				(color 255 0 0 1)
+			)
+		)
+		(uuid "2bce2a1f-4193-41cf-9c3e-dadb349743d8")
+	)
 	(text "Memoire"
 		(exclude_from_sim no)
 		(at 249.682 70.612 0)
@@ -4114,6 +4192,58 @@
 			)
 		)
 		(uuid "34f37574-2d5d-418e-a424-f837d32be141")
+	)
+	(text "inutile ?"
+		(exclude_from_sim no)
+		(at 168.148 24.892 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+				(bold yes)
+				(color 255 0 0 1)
+			)
+		)
+		(uuid "385e819c-2f17-45ff-9259-ee3e1000dcf8")
+	)
+	(text "resistance"
+		(exclude_from_sim no)
+		(at 287.528 102.362 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+				(bold yes)
+				(color 255 0 0 1)
+			)
+		)
+		(uuid "61ac20e8-a56a-45f5-9675-1b0ee0a57ee1")
+	)
+	(text "ap7333-33SRG-7"
+		(exclude_from_sim no)
+		(at 269.748 134.112 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+				(bold yes)
+				(color 255 0 0 1)
+			)
+		)
+		(uuid "754c98bd-204b-406a-99b5-7e27e36934c0")
+	)
+	(text "3.3 V ?"
+		(exclude_from_sim no)
+		(at 108.458 13.462 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+				(bold yes)
+				(color 255 0 0 1)
+			)
+		)
+		(uuid "bdb77630-911d-4aca-b332-5282d4b1d5ed")
 	)
 	(text "AVR ISP"
 		(exclude_from_sim no)
