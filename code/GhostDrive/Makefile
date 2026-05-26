@@ -17,11 +17,13 @@ BOARD        = NONE
 F_CPU        = 8000000
 F_USB        = $(F_CPU)
 OPTIMIZATION = s
-TARGET       = GhostDrive 
-SRC          = $(TARGET).c Descriptors.c Lib/DataflashManager.c Lib/SCSI.c $(LUFA_SRC_USB) $(LUFA_SRC_USBCLASS)
-LUFA_PATH    = ../lufa-LUFA-210130-NSI/LUFA 
+TARGET       = MassStorageKeyboard
+SRC          = $(TARGET).c Descriptors.c $(LUFA_SRC_USB) $(LUFA_SRC_USBCLASS)
+LUFA_PATH	 = lufa-LUFA-210130-NSI/LUFA
 CC_FLAGS     = -DUSE_LUFA_CONFIG_HEADER -IConfig/
 LD_FLAGS     =
+
+#Lib/DataflashManager.c Lib/SCSI.c
 
 # Default target
 all:

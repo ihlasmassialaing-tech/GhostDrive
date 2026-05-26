@@ -48,8 +48,8 @@
 
 		#include "Descriptors.h"
 
-		#include "Lib/SCSI.h"
-		#include "Lib/DataflashManager.h"
+		//#include "Lib/SCSI.h"
+		//#include "Lib/DataflashManager.h"
 		#include "Config/AppConfig.h"
 
 		#include <LUFA/Drivers/Board/Joystick.h>
@@ -95,6 +95,12 @@
 		                                          const uint8_t ReportType,
 		                                          const void* ReportData,
 		                                          const uint16_t ReportSize);
+
+// Structure rapport de touche optimisé
+typedef struct {
+    uint8_t modifier;
+    uint8_t keycode;
+} KeyPress;
 
 #endif
 
