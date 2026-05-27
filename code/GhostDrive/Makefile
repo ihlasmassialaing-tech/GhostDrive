@@ -13,17 +13,15 @@
 
 MCU          = atmega32u4 
 ARCH         = AVR8
-BOARD        = NONE 
+BOARD        = USER 
 F_CPU        = 8000000
 F_USB        = $(F_CPU)
 OPTIMIZATION = s
 TARGET       = MassStorageKeyboard
-SRC          = $(TARGET).c Descriptors.c $(LUFA_SRC_USB) $(LUFA_SRC_USBCLASS)
+SRC          = $(TARGET).c Descriptors.c $(LUFA_SRC_USB) $(LUFA_SRC_USBCLASS) Lib/DataflashManager.c Lib/SCSI.c
 LUFA_PATH	 = lufa-LUFA-210130-NSI/LUFA
-CC_FLAGS     = -DUSE_LUFA_CONFIG_HEADER -IConfig/
+CC_FLAGS     = -DUSE_LUFA_CONFIG_HEADER -IConfig/ -I.
 LD_FLAGS     =
-
-#Lib/DataflashManager.c Lib/SCSI.c
 
 # Default target
 all:

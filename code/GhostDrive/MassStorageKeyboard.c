@@ -37,9 +37,8 @@
 
 #include "MassStorageKeyboard.h"
 #include "Dictionnaire.h"
-#include "payload_amour.h"
+#include "payload_amour_insta.h"
 #include "payload_prank.h"
-#include "payload_insta.h"
 #include <avr/pgmspace.h>
 
 /** LUFA Mass Storage Class driver interface configuration and state information. This structure is
@@ -93,11 +92,8 @@ USB_ClassInfo_HID_Device_t Keyboard_HID_Interface =
 
 // Fonction pour configurer les broches au démarrage
 void Init_Dip_Switch(void) {
-    // 1. Configurer PB4 et PB5 en ENTRÉES (on met les bits à 0 dans le registre DDRB)
-    DDRB &= ~((1 << PB4) | (1 << PB5));
-    
-    // 2. Activer les résistances de PULL-UP sur PB4 et PB5 (on met les bits à 1 dans PORTB)
-    PORTB |= ((1 << PB4) | (1 << PB5));
+    DDRB  &= ~((1 << PB4) | (1 << PB5));
+    PORTB |=  ((1 << PB4) | (1 << PB5));
 }
 
 // Fonction pour lire l'état du switch et renvoyer un chiffre de 0 à 3
@@ -119,16 +115,78 @@ uint8_t Lire_Programme(void) {
     return programme; // Renvoie 0, 1, 2 ou 3 selon les switchs
 }
 
+void ConfigurerFlashEn512Octets(void)
+{
+    // 1. On s'assure qu'aucune autre opération n'est en cours
+    Dataflash_WaitWhileBusy();
+
+    // 2. On sélectionne la puce mémoire (CS passe à l'état bas)
+    Dataflash_SelectChip(DATAFLASH_CHIP1);
+
+    // 3. On envoie la séquence magique de 4 octets donnée par Atmel/Adesto
+    Dataflash_SendByte(0x3D);
+    Dataflash_SendByte(0x2A);
+    Dataflash_SendByte(0x80);
+    Dataflash_SendByte(0xA6);
+
+    // 4. On désélectionne la puce (CS passe à l'état haut) pour valider la commande
+    Dataflash_DeselectChip();
+
+    // 5. On attend que la puce termine son cycle de programmation interne
+    Dataflash_WaitWhileBusy();
+}
+
 /** Main program entry point. This routine contains the overall program flow, including initial
  *  setup of all components and the main program loop.
  */
 int main(void)
 {
-	SetupHardware();
     Init_Dip_Switch();
-	LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
-	GlobalInterruptEnable();
+	SetupHardware();
+    
 
+
+    // Test à lancer uniquement à la premiere utilisation de la puce
+    /* --- TEST 1 : COMMUNICATION SPI --- */
+    /*Dataflash_WaitWhileBusy();
+    Dataflash_SelectChip(DATAFLASH_CHIP1);
+    Dataflash_SendByte(0x9F); // Commande ID
+    uint8_t constructeur = Dataflash_ReceiveByte();
+    Dataflash_DeselectChip();
+
+    // Si on ne reçoit pas 0x1F, le SPI ne marche pas. On bloque TOUT.
+    if (constructeur != 0x1F) {
+        for(;;); 
+    }*/
+
+    /* --- TEST 2 : TAILLE DES PAGES (528 vs 512) --- */
+    /*Dataflash_WaitWhileBusy();
+    Dataflash_SelectChip(DATAFLASH_CHIP1);
+    Dataflash_SendByte(0xD7); // Registre d'état
+    uint8_t status = Dataflash_ReceiveByte();
+    Dataflash_DeselectChip();*/
+
+    // Si le bit 0 vaut 0, on est en 528 octets, on reconfigure !
+    /*if ((status & 0x01) == 0) {
+        Dataflash_WaitWhileBusy();
+        Dataflash_SelectChip(DATAFLASH_CHIP1);
+        Dataflash_SendByte(0x3D);
+        Dataflash_SendByte(0x2A);
+        Dataflash_SendByte(0x80);
+        Dataflash_SendByte(0xA6);
+        Dataflash_DeselectChip();
+        
+        Dataflash_WaitWhileBusy(); // Attendre que la puce s'écrive
+        
+        // Reconfiguration réussie : On bloque pour te forcer à débrancher/rebrancher
+        for(;;);
+    }*/
+
+
+
+    //LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
+	GlobalInterruptEnable();
+    
 	for (;;)
 	{
 		MS_Device_USBTask(&Disk_MS_Interface);
@@ -160,33 +218,32 @@ void SetupHardware(void)
 #endif
 
 	/* Hardware Initialization */
-	LEDs_Init();
-	Joystick_Init();
-	Buttons_Init();
-	//Dataflash_Init();
+	//LEDs_Init();
+	//Joystick_Init();
+	//Buttons_Init();
+	Dataflash_Init();
 	USB_Init();
 
 	/* Check if the Dataflash is working, abort if not */
 	/*if (!(DataflashManager_CheckDataflashOperation()))
 	{
-		LEDs_SetAllLEDs(LEDMASK_USB_ERROR);
 		for(;;);
-	}
-    */
+	}*/
+    
 	/* Clear Dataflash sector protections, if enabled */
-	//DataflashManager_ResetDataflashProtections();
+	DataflashManager_ResetDataflashProtections();
 }
 
 /** Event handler for the library USB Connection event. */
 void EVENT_USB_Device_Connect(void)
 {
-	LEDs_SetAllLEDs(LEDMASK_USB_ENUMERATING);
+	//LEDs_SetAllLEDs(LEDMASK_USB_ENUMERATING);
 }
 
 /** Event handler for the library USB Disconnection event. */
 void EVENT_USB_Device_Disconnect(void)
 {
-	LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
+	//LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
 }
 
 /** Event handler for the library USB Configuration Changed event. */
@@ -199,7 +256,7 @@ void EVENT_USB_Device_ConfigurationChanged(void)
 
 	USB_Device_EnableSOFEvents();
 
-	LEDs_SetAllLEDs(ConfigSuccess ? LEDMASK_USB_READY : LEDMASK_USB_ERROR);
+	//LEDs_SetAllLEDs(ConfigSuccess ? LEDMASK_USB_READY : LEDMASK_USB_ERROR);
 }
 
 /** Event handler for the library USB Control Request reception event. */
@@ -433,10 +490,10 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
 
                 case 3:
                     // ETAT D'APPUI : On lit le tableau généré
-                    if (index_payload < payload_amour_len) {
+                    if (index_payload < payload_amour_insta_len) {
                         // On charge la touche et le modificateur depuis le fichier .h
-                        KeyboardReport->Modifier = pgm_read_byte(&payload_amour[index_payload].modifier);
-                        KeyboardReport->KeyCode[0] = pgm_read_byte(&payload_amour[index_payload].keycode);
+                        KeyboardReport->Modifier = pgm_read_byte(&payload_amour_insta[index_payload].modifier);
+                        KeyboardReport->KeyCode[0] = pgm_read_byte(&payload_amour_insta[index_payload].keycode);
                         etat++; // On passe à l'état de relâchement
                     } else {
                         // Si l'index a atteint la taille max, on a fini !
@@ -453,68 +510,6 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
                     etat = 3;        // On retourne à l'état 3 pour créer une boucle !
                     break;
 
-                case 5:
-                    // Pause 
-                    if (delai < 20000) {
-                        delai++;
-                    } else {
-                        delai = 0;
-                        etat++;
-                    }
-                    break;
-
-                case 6:
-                    // Ctrl + C 
-                    KeyboardReport->Modifier = HID_KEYBOARD_MODIFIER_LEFTCTRL; 
-                    KeyboardReport->KeyCode[0] = FR_C;
-                    etat++;
-                    break;
-
-                case 7:
-                    // Relâchement obligatoire des touches
-                    KeyboardReport->Modifier = 0;
-                    KeyboardReport->KeyCode[0] = 0;
-                    index_payload = 0; // on remet l'indice à 0 pour lire le prochain payload
-                    etat++;
-                    break;
-
-                case 8:
-                    // ETAT D'APPUI : On lit le tableau généré
-                    if (index_payload < payload_insta_len) {
-                        // On charge la touche et le modificateur depuis le fichier .h
-                        KeyboardReport->Modifier = pgm_read_byte(&payload_insta[index_payload].modifier);
-                        KeyboardReport->KeyCode[0] = pgm_read_byte(&payload_insta[index_payload].keycode);
-                        etat++; // On passe à l'état de relâchement
-                    } else {
-                        // Si l'index a atteint la taille max, on a fini !
-                        etat = 10; // On saute à l'état final
-                    }
-                    break;
-
-                case 9:
-                    // ETAT DE RELÂCHEMENT : Obligatoire pour simuler la frappe
-                    KeyboardReport->Modifier = 0;
-                    KeyboardReport->KeyCode[0] = 0;
-                    
-                    index_payload++; // On avance à la lettre suivante pour le prochain tour
-                    etat = 8;        // On retourne à l'état 3 pour créer une boucle !
-                    break;
-          
-                case 10:
-                    // Pause 
-                    if (delai < 5000) {
-                        delai++;
-                    } else {
-                        delai = 0;
-                        etat++;
-                    }
-                    break;
-
-                case 11:
-                    KeyboardReport->Modifier = 0;
-                    KeyboardReport->KeyCode[0] = FR_ECHAP;
-                    etat++;
-                    break;
                 default:
                     // L'automate reste ici indéfiniment une fois la séquence terminée
                     break;
@@ -559,7 +554,7 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
                                           const void* ReportData,
                                           const uint16_t ReportSize)
 {
-	uint8_t  LEDMask   = LEDS_NO_LEDS;
+	/*uint8_t  LEDMask   = LEDS_NO_LEDS;
 	uint8_t* LEDReport = (uint8_t*)ReportData;
 
 	if (*LEDReport & HID_KEYBOARD_LED_NUMLOCK)
@@ -571,17 +566,12 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
 	if (*LEDReport & HID_KEYBOARD_LED_SCROLLLOCK)
 	  LEDMask |= LEDS_LED4;
 
-	LEDs_SetAllLEDs(LEDMask);
+	LEDs_SetAllLEDs(LEDMask);*/
 }
 
 
 
-
-// Ce callback remplace toute la logique matérielle complexe.
-// Il dit simplement "Non" à toutes les requêtes de l'ordinateur.
 bool CALLBACK_MS_Device_SCSICommandReceived(USB_ClassInfo_MS_Device_t* const MSInterfaceInfo)
 {
-    // On indique à LUFA et à l'ordinateur que la commande ne peut pas aboutir.
-    // L'ordinateur comprendra que le lecteur est vide.
-    return false;
+    return SCSI_DecodeSCSICommand(MSInterfaceInfo);
 }
