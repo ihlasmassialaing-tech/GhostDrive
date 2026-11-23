@@ -1,3 +1,40 @@
+# GhostDrive — Hardware Security-Audit Device (BadUSB)
+
+> A from-scratch embedded hardware project: a custom USB device (own PCB + firmware)
+> designed for authorized security-awareness demonstrations. Built for a supervised
+> engineering course.
+
+**Author:** Ihlas Massiala — engineering student, IoT & Cybersecurity, Polytech Lille.
+**Stack:** ATmega32U4 · AT45DB161E (external SPI flash) · KiCad (PCB) · C / LUFA (USB firmware) · Python
+
+### ⚠️ Disclaimer — educational use only
+This is an **academic project** built to learn embedded systems and hardware-security
+concepts. It must only be used on hardware you **own** or have **explicit written
+authorization** to test. The author takes no responsibility for any misuse.
+
+### Overview (English)
+GhostDrive is a small **USB device of the BadUSB family**. It presents itself to a host as a
+standard USB mass-storage key (a 2 MB drive) while also acting as a USB keyboard (HID),
+illustrating why untrusted USB peripherals are a real security risk. The behaviour is selected
+**offline** with a mechanical DIP switch — no battery required.
+
+The project was designed end to end:
+- **Hardware:** a custom PCB in **KiCad** around an **ATmega32U4** MCU with an external
+  **AT45DB161E** SPI flash, in a USB-key form factor (schematic, routing, production files).
+- **Firmware:** written in **C** on top of the **LUFA** USB stack — USB composite-device
+  enumeration, SPI communication with the flash (FAT12 geometry) and reading the hardware
+  configuration switches.
+- **Tooling:** a small **Python** generator and low-level test firmware (status-LED board bring-up).
+
+### What this project demonstrates
+Embedded C, USB device programming (LUFA), SPI/flash handling, PCB design (KiCad), hardware
+bring-up and debugging, and a practical understanding of a well-known physical-access attack
+class — the kind of hands-on background useful for offensive security / penetration testing.
+
+> 🇫🇷 **Version française complète ci-dessous.**
+
+---
+
 # GhostDrive - Plateforme d'Audit de Sécurité Furtive & Autonome
 
 ## Description Générale
